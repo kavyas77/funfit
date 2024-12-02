@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="com.gym.model.Batch" %>
+    <%@ page import="java.util.List" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add Participant</title>
+</head>
+<body>
+<h1>Add a New Participant</h1>
+
+<form action="/participantServlet" method="POST">
+
+
+    <label for="name">Participant Name: </label>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="batch">Batch: </label>
+    <select id="batch" name="batchId" required>
+        <option value="">Select a Batch</option>
+        <!-- Dynamically populate batches here -->
+        <%
+            // Assuming you have a BatchDAO and a method to fetch all batches
+            List<Batch> batches = (List<Batch>) request.getAttribute("batches"); // batches should be set in your servlet
+            for (Batch batch : batches) {
+        %>
+        <option value="<%= batch.getBatchId() %>">
+                <%= batch.getBatchName() %> (Schedule: <%= batch.getTime() %>)
+            </option>
+        <%
+            }
+        %>
+    </select><br><br>
+
+    <input type="submit" value="Add Participant">
+</form>
+
+<br>
+<a href="welcome.jsp">Back to Home</a>
+            
+
+
+</body>
+</html>

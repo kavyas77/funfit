@@ -1,0 +1,44 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page import="java.util.List" %>
+<%@ page import="com.gym.model.Batch" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batch List</title>
+</head>
+<body>
+    <h1>Batch List</h1>
+
+    <table border="1">
+        <tr>
+            <th>Batch ID</th>
+            <th>Batch Name</th>
+            <th>Batch Time</th>
+        </tr>
+
+        <%
+            // Fetch batches from the request
+            List<Batch> batches = (List<Batch>) request.getAttribute("batches");
+            
+            if (batches != null && !batches.isEmpty()) {
+                for (Batch batch : batches) {
+        %>
+        <tr>
+            <td><%= batch.getBatchId() %></td>
+            <td><%= batch.getBatchName() %></td>
+            <td><%= batch.getTime() %></td>
+        </tr>
+        <%
+                }
+            } else {
+        %>
+        <tr>
+            <td colspan="3">No batches available</td>
+        </tr>
+        <%
+            }
+        %>
+    </table>
+</body>
+</html>

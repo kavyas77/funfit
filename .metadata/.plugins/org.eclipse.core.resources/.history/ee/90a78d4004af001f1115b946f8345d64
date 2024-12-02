@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gym Management</title>
+</head>
+<body>
+<h1>Welcome to Gym Management System</h1>
+    <ul>
+        <li><a href="batchServlet?action=add">Add Batch</a></li>
+        <li><a href="participantServlet?action=add">Add Participant</a></li>
+        <li><a href="batchServlet?action=view">View Batches</a></li>
+        <li><a href="participantServlet?action=view">View Participants</a></li>
+    </ul>
+
+</body>
+</html>

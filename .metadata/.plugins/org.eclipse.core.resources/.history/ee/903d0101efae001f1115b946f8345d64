@@ -1,0 +1,5 @@
+package com.gym.servlet;
+
+public class BatchServlet {
+
+}

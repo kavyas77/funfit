@@ -1,0 +1,53 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+    <%@ page import="com.gym.model.Participant" %>
+    <%@ page import="com.gym.model.Batch" %>
+    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Participant List</title>
+</head>
+<body>
+    <h1>Participant List</h1>
+
+    <!-- Display the list of participants -->
+    <h2>Existing Participants</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Batch Name</th>
+                <th>Batch Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+                List<Participant> participants = (List<Participant>) request.getAttribute("participants");
+                if (participants != null && !participants.isEmpty()) {
+                    for (Participant participant : participants) {
+                        Batch batch = participant.getBatch();  // Get the batch object from participant
+            %>
+                        <tr>
+                            <td><%= participant.getName() %></td>
+                            <td><%= participant.getEmail() %></td>
+                            <td><%= batch != null ? batch.getBatchName() : "No Batch" %></td>
+                            <td><%= batch != null ? batch.getTime() : "No Time" %></td>
+                        </tr>
+            <%      }
+                } else { 
+            %>
+                        <tr><td colspan="4">No participants available</td></tr>
+            <%      }
+            %>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="welcome.jsp">Back to Home</a>
+
+</body>
+</html>

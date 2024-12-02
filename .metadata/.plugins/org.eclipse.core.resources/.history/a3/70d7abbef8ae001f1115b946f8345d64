@@ -1,0 +1,33 @@
+package com.gym.servlet;
+import com.gym.dao.ParticipantDAO;
+import com.gym.model.Participant;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/participantServlet")
+public class ParticipantServlet extends HttpServlet {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ParticipantDAO participantDAO = new ParticipantDAO();
+        request.setAttribute("participants", participantDAO.getAllParticipants());
+        request.getRequestDispatcher("/jsp/participantList.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String batch = request.getParameter("batch");
+
+        Participant participant = new Participant();
+        participant.setName(name);
+        participant.setBatch(batch);
+
+        ParticipantDAO participantDAO = new ParticipantDAO();
+        participantDAO.addParticipant(participant);
+        response.sendRedirect("participantServlet");
+    }
+
+}
